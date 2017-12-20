@@ -1,0 +1,2 @@
+recursive-include hwsmodule/templates *
+recursive-include hwsmodule/static *

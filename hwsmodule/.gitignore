@@ -1,0 +1,12 @@
+# Python
+
+venv/
+*.pyc
+*.egg-info/
+dist/
+settings.cfg
+*.log*
+
+# javascript
+
+node_modules/
