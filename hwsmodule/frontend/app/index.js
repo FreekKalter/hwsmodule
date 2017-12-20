@@ -2,6 +2,7 @@
 const React = require('react');
 const QRCode = require('qrcode.react');
 const ReactDOM = require('react-dom');
+const NumberFormat = require('react-number-format');
 
 class QR extends React.Component{
     constructor(props){
@@ -36,14 +37,15 @@ class QR extends React.Component{
             console.log(s);
             this.getOtp();
         }
-
     }
 
     render(){
         return(
           <div className='qrcode'>
             <QRCode value={this.state.result} level="H" size={256} />
-            <p>{this.state.otp}</p>
+            <p>
+              <NumberFormat id="otp" format="### ###" displayType="text" value={this.state.otp} />
+            </p>
           </div>
         );
     }

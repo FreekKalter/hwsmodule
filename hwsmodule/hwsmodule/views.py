@@ -11,4 +11,5 @@ def index():
 
 @app.route('/otp')
 def get_otp():
-    return str(otp.get_totp(app.config['OTP_SECRET']))
+    totp = '{:0>6}'.format(otp.get_totp(app.config['OTP_SECRET']))
+    return totp
