@@ -5,3 +5,7 @@ body {
 .qrcode{
     margin: 10px;
 }
+
+.error{
+    color: red;
+}

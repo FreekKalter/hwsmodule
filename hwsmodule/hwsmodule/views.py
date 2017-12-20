@@ -1,5 +1,6 @@
 from flask import render_template
 import onetimepass as otp
+import json
 
 from hwsmodule import app
 
@@ -12,4 +13,4 @@ def index():
 @app.route('/otp')
 def get_otp():
     totp = '{:0>6}'.format(otp.get_totp(app.config['OTP_SECRET']))
-    return totp
+    return json.dumps(totp)

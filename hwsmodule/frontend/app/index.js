@@ -7,7 +7,7 @@ const NumberFormat = require('react-number-format');
 class QR extends React.Component{
     constructor(props){
         super(props);
-        this.state = {base: "http://192.168.0.11:5000/checkin/fkalter/", otp: '', result: ''};
+        this.state = {base: "http://192.168.0.11:5000/checkin/fkalter/", otp: '', result: '', error: ''};
         this.getOtp = this.getOtp.bind(this);
         this.componentDidMount = this.componentDidMount.bind(this);
         this.render = this.render.bind(this);
@@ -16,9 +16,16 @@ class QR extends React.Component{
 
     getOtp(){
         fetch('/otp').then(function(response){
-          response.json().then(function(data){
-            this.setState({otp: data, result: this.state.base + data});
-          }.bind(this));
+           if(response.ok){
+              response.json().then(function(data){
+                console.log(data);
+                this.setState({otp: data, result: this.state.base + data, error: ''});
+              }.bind(this));
+           }else{
+               this.setState({otp: '', error: 'Response error'});
+           }
+        }.bind(this)).catch(function(error){
+           this.setState({otp: '', error: 'Connection error'});
         }.bind(this));
     }
 
@@ -34,7 +41,6 @@ class QR extends React.Component{
         var d = new Date();
         var s = d.getSeconds();
         if(s == 0 || s == 30){
-            console.log(s);
             this.getOtp();
         }
     }
@@ -45,6 +51,9 @@ class QR extends React.Component{
             <QRCode value={this.state.result} level="H" size={256} />
             <p>
               <NumberFormat id="otp" format="### ###" displayType="text" value={this.state.otp} />
+            </p>
+            <p className="error">
+                {this.state.error}
             </p>
           </div>
         );
