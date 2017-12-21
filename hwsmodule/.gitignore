@@ -10,3 +10,4 @@ settings.cfg
 # javascript
 
 node_modules/
+*package-lock.json
