@@ -47,14 +47,23 @@ class QR extends React.Component{
 
     render(){
         return(
-          <div className='qrcode'>
-            <QRCode value={this.state.result} level="H" size={256} />
-            <p>
-              <NumberFormat id="otp" format="### ###" displayType="text" value={this.state.otp} />
-            </p>
-            <p className="error">
-                {this.state.error}
-            </p>
+          <div className="row">
+
+            <div className="col-md-8 col-md-offset-2">
+              <div className={"qrcode center-block"}>
+                <QRCode value={this.state.result} level="H" size={512}/>
+              </div>
+            </div>
+
+            <div className="col-md-8 col-md-offset-2">
+                <p className="text-center">
+                  <NumberFormat id="otp" format="### ###" displayType="text" value={this.state.otp} />
+                </p>
+                <p className="error text-center">
+                    {this.state.error}
+                </p>
+            </div>
+
           </div>
         );
     }
