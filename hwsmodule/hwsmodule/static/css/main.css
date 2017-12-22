@@ -1,5 +1,6 @@
 body {
-  font-size: 20px;
+  font-size: 40px;
+  font-weight: bold;
 }
 
 .error{
@@ -7,6 +8,7 @@ body {
 }
 
 .qrcode{
+    margin-top: 200px;
     padding: 10px;
 }
 
