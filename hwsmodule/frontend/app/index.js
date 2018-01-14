@@ -4,10 +4,13 @@ const QRCode = require('qrcode.react');
 const ReactDOM = require('react-dom');
 const NumberFormat = require('react-number-format');
 
+import { Progress } from 'react-sweet-progress';
+
 class QR extends React.Component{
     constructor(props){
         super(props);
-        this.state = {base: "http://192.168.0.11:5000/checkin/fkalter/", otp: '', result: '', error: ''};
+        this.state = {base: "http://192.168.0.11:5000/checkin/fkalter/", otp: '',
+                      result: '', error: '', qrcolor: '#000000', progress: "0"};
         this.getOtp = this.getOtp.bind(this);
         this.componentDidMount = this.componentDidMount.bind(this);
         this.render = this.render.bind(this);
@@ -33,17 +36,27 @@ class QR extends React.Component{
         this.getOtp();
         this.timerId = setInterval(
             () => this.tick(),
-            980
+            300
         );
     }
 
     tick(){
         var d = new Date();
         var s = d.getSeconds();
+        var ms = d.getMilliseconds();
         if(s == 0 || s == 30){
             this.getOtp();
+            this.setState({qrcolor: '#000000'});
+        }else if(s >= 27 && s < 30 || s >= 57 && s<60){
+            this.setState({qrcolor: '#FF0000'});
+        }
+        if(s<30){
+            this.setState({progress: Math.round(s*1000+ms * (100/30000))});
+        }else{
+            this.setState({progress: Math.round(((s*1000+ms)-30000) * (100/30000))});
         }
     }
+
 
     render(){
         return(
@@ -51,11 +64,11 @@ class QR extends React.Component{
 
             <div className="col-md-8 col-md-offset-2">
               <div className={"qrcode center-block"}>
-                <QRCode value={this.state.result} level="H" size={512}/>
+                <QRCode value={this.state.result} fgColor={this.state.qrcolor} level="H" size={512}/>
               </div>
             </div>
 
-            <div className="col-md-8 col-md-offset-2">
+            <div className="col-md-2 col-md-offset-5">
                 <p className="text-center">
                   <NumberFormat id="otp" format="### ###" displayType="text" value={this.state.otp} />
                 </p>
@@ -63,7 +76,30 @@ class QR extends React.Component{
                     {this.state.error}
                 </p>
             </div>
+            <div className="col-md-2">
+                <div className="center-block">
+                    <Progress
+                      type="circle"
+                      width={70}
+                      theme={{
+                        active: {
+                            symbol: ' ',
+                            color: '#000000',
+                        },
+                        default: {
+                          symbol: ' ',
+                          color: '#000000'
+                        },
+                        success: {
+                          symbol: ' ',
+                          color: '#000000'
+                        }
+                      }}
+                      percent={this.state.progress}
 
+                    />
+                </div>
+            </div>
           </div>
         );
     }

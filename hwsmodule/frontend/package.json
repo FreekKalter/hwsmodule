@@ -15,6 +15,7 @@
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
     "react-number-format": "^3.1.2",
+    "react-sweet-progress": "^1.1.0",
     "webpack": "^3.10.0"
   },
   "devDependencies": {
