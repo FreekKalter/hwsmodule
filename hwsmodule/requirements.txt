@@ -1,9 +1,0 @@
-click==6.7
-Flask==0.12.2
--e git+git@github.com:FreekKalter/hwsmodule.git@eab5564a92060c850ce2cadb83e14597bc4c4faf#egg=hwsmodule&subdirectory=hwsmodule
-itsdangerous==0.24
-Jinja2==2.10
-MarkupSafe==1.0
-onetimepass==1.0.1
-six==1.11.0
-Werkzeug==0.13

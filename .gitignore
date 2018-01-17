@@ -1,6 +1,7 @@
 # Python
 
 venv/
+instance/
 *.pyc
 *.egg-info/
 dist/

@@ -4,10 +4,10 @@ clean:
 	rm -rf venv && rm -rf *.egg-info && rm -rf dist && rm -rf *.log*
 
 venv:
-	virtualenv --python=python3 venv && venv/bin/python setup.py develop
+	virtualenv --python=python3 venv && venv/bin/pip3 install -r requirements.txt
 
 run: venv
-	FLASK_APP=hwsmodule HWSMODULE_SETTINGS=../settings.cfg venv/bin/flask run -h 0.0.0.0 -p 4000 --reload
+	python run.py
 
 test: venv
 	HWSMODULE_SETTINGS=../settings.cfg venv/bin/python -m unittest discover -s tests

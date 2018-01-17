@@ -1,9 +1,8 @@
 import os
 from flask import Flask
 
-app = Flask(__name__)
-app.config.from_object('hwsmodule.default_settings')
-app.config.from_envvar('HWSMODULE_SETTINGS')
+app = Flask(__name__, instance_relative_config=True)
+app.config.from_pyfile('flask.cfg')
 
 if not app.debug:
     import logging
@@ -14,4 +13,4 @@ if not app.debug:
     file_handler.setFormatter(logging.Formatter('<%(asctime)s> <%(levelname)s> %(message)s'))
     app.logger.addHandler(file_handler)
 
-import hwsmodule.views
+from . import views
