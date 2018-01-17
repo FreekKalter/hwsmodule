@@ -68,7 +68,7 @@ class QR extends React.Component{
               </div>
             </div>
 
-            <div className="col-md-2 col-md-offset-5">
+            <div className="col-md-2 col-md-offset-2">
                 <p className="text-center">
                   <NumberFormat id="otp" format="### ###" displayType="text" value={this.state.otp} />
                 </p>
@@ -80,7 +80,8 @@ class QR extends React.Component{
                 <div className="center-block">
                     <Progress
                       type="circle"
-                      width={70}
+                      width={30}
+		      strokeWidth={10}
                       theme={{
                         active: {
                             symbol: ' ',
