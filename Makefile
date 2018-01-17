@@ -4,7 +4,7 @@ clean:
 	rm -rf venv && rm -rf *.egg-info && rm -rf dist && rm -rf *.log*
 
 venv:
-	virtualenv --python=python3 venv && venv/bin/pip3 install -r requirements.txt
+	python3 -m venv `pwd`/venv && venv/bin/pip3 install -r requirements.txt
 
 run: venv
 	python run.py
